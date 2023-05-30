@@ -4,6 +4,7 @@ import (
 	"cli/src/common"
 	"fmt"
 	"os"
+	"time"
 
 	xlogger "github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh"
@@ -21,6 +22,7 @@ func (C SSHConfig) SSHClientConfig(user, password string) *ssh.ClientConfig {
 		Auth: []ssh.AuthMethod{
 			ssh.Password(password),
 		},
+		Timeout:         1800 * time.Second,
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 	return ssh_config

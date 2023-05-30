@@ -25,10 +25,10 @@ func initPodCli() *cobra.Command {
 			cliPodCmdObj.Exec(args)
 		},
 	}
-	cliPodCmd.Flags().StringVarP(&cliPodCmdObj.PodName, common.SUB_CMD_PODNAME, common.SUB_CMD_PODNAME_SHORT, "", "Pod名称")
 	cliPodCmd.Flags().StringVarP(&cliPodCmdObj.Container, common.SUB_CMD_CONTAINER, common.SUB_CMD_CONTAINER_SHORT, "", "Container名称")
 	cliPodCmd.Flags().StringVarP(&cliPodCmdObj.NameSpace, common.SUB_CMD_NAMESPACE, common.SUB_CMD_NAMESPACE_SHORT, "default", "NameSpace名称")
-	cliPodCmd.Flags().StringVarP(&cliPodCmdObj.Mode, common.SUB_CMD_CLI_MODE, common.SUB_CMD_CLI_MODE_SHORT, "host", "当前执行环境类型")
+	cliPodCmd.Flags().StringVarP(&cliPodCmdObj.Mode, common.SUB_CMD_CLI_MODE, common.SUB_CMD_CLI_MODE_SHORT, "host", "当前执行环境类型[host or pod]")
+	cliPodCmd.Flags().IntVarP(&cliPodCmdObj.Index, common.SUB_CMD_INDEX, common.SUB_CMD_INDEX_SHORT, 0, "在第几个Pod中执行[当匹配到多个Pod时]")
 	cliPodCmd.PersistentFlags().String("", "", "指明需要执行的CLI Command")
 	cliPodCmd.MarkFlagRequired(common.SUB_CMD_PODNAME)
 	cliPodCmd.MarkFlagRequired(common.SUB_CMD_CONTAINER)

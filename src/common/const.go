@@ -14,6 +14,8 @@ const (
 	SUB_CMD_NAMESPACE_SHORT = "n"
 	SUB_CMD_CLI_POD_TYPE    = "pod"
 	SUB_CMD_CLI_HOST_TYPE   = "host"
+	SUB_CMD_INDEX           = "index"
+	SUB_CMD_INDEX_SHORT     = "i"
 
 	// SSH执行CMD
 	SUB_CMD_SSH            = "exec_ssh"
