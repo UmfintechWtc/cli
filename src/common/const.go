@@ -8,6 +8,8 @@ const (
 	SUB_CMD_CLI_MODE_SHORT  = "m"
 	SUB_CMD_PODNAME         = "service"
 	SUB_CMD_PODNAME_SHORT   = "s"
+	SUB_CMD_QUERY           = "query"
+	SUB_CMD_QUERY_SHORT     = "q"
 	SUB_CMD_CONTAINER       = "container"
 	SUB_CMD_CONTAINER_SHORT = "c"
 	SUB_CMD_NAMESPACE       = "namespace"

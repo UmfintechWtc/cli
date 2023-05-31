@@ -1,5 +1,10 @@
 package common
 
+import (
+	"fmt"
+	"strings"
+)
+
 func Covert_Slice_To_Map(sl []string) map[string]struct{} {
 	// []string -> map[string]struct{}
 	fmt_map := make(map[string]struct{}, len(sl))
@@ -16,9 +21,20 @@ func Check_key_exists(fmt_map map[string]struct{}, tag string) bool {
 }
 
 func CheckIndexIsExceedListLen(podIndex int, podList []string) bool {
-	if len(podList) >= podIndex+1 {
+	if len(podList) >= podIndex-1 {
 		return true
 	} else {
 		return false
 	}
+}
+
+func ListSpecialFmt(fmtList []string) string {
+	var result string
+	for i, broker := range fmtList {
+		index := i + 1
+		result += fmt.Sprintf("%s(index: %d), ", broker, index)
+	}
+	result = strings.TrimSuffix(result, ", ")
+
+	return result
 }

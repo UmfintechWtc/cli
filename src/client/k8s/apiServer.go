@@ -39,25 +39,20 @@ func initCoreV1(initK8sConn *K8sApiServer, podname, containerName, namespace str
 	return executorApi
 }
 
-func (K *K8sApiServer) Run_exec(containerName, namespace, mode string, podIndex int, command []string) {
+func (K *K8sApiServer) Run_exec(initK8sConn *K8sApiServer, podName, containerName, namespace string, command []string) {
 	var stdout, stderr bytes.Buffer
-	initK8sConn := K.initConfigInPod(mode)
-	targetPodList := GetContainerBelongToAllPod(initK8sConn, namespace, containerName)
-	if !common.CheckIndexIsExceedListLen(podIndex, targetPodList) {
-		xlogger.Fatalf("执行的第%d个Pod超过匹配结果,请确认:[%s]", podIndex, targetPodList)
-	}
-	exec := initCoreV1(initK8sConn, targetPodList[podIndex], containerName, namespace, command)
+	exec := initCoreV1(initK8sConn, podName, containerName, namespace, command)
 	stream_err := exec.Stream(remotecommand.StreamOptions{
 		Stdin:  nil,
 		Stdout: &stdout,
 		Stderr: &stderr,
 	})
 	if stream_err != nil {
-		fmt_message := fmt.Sprintf("%s[%s]:%s\n", targetPodList[podIndex], containerName, command)
+		fmt_message := fmt.Sprintf("%s[%s]:%s\n", podName, containerName, command)
 		xlogger.Error(common.Rsperror(
 			common.XE_EXEC_ERROR,
 			fmt_message+stream_err.Error()))
 		os.Exit(2)
 	}
-	xlogger.Infof("容器[%s]匹配到多个Pod:%s\n执行的第%d个Pod[%s]，命令输出: \n%s", containerName, targetPodList, podIndex+1, targetPodList[podIndex], stdout.String())
+	xlogger.Infof("namespace:[%s] -> Pod:[%s] -> container:[%s] \n命令输出: \n%s", namespace, podName, containerName, stdout.String())
 }

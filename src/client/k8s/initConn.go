@@ -16,7 +16,7 @@ type K8sApiServer struct {
 	K8sClient *kubernetes.Clientset
 }
 
-func (K *K8sApiServer) initConfigInPod(mode string) *K8sApiServer {
+func (K *K8sApiServer) InitConfigInPod(mode string) *K8sApiServer {
 	if mode == common.SUB_CMD_CLI_POD_TYPE {
 		// Pod内加载sa默认信息及环境变量
 		EnvConfig, EnvConfig_Err := rest.InClusterConfig()
