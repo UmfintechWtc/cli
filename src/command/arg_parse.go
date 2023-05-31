@@ -2,6 +2,7 @@ package command
 
 import (
 	"cli/src/common"
+	"fmt"
 
 	"github.com/spf13/cobra"
 )
@@ -10,6 +11,7 @@ func InitParser() *cobra.Command {
 	var rootCmd = &cobra.Command{Use: common.APP_NAME}
 	rootCmd.AddCommand(initPodCli())
 	rootCmd.AddCommand(initSSHCli())
+	rootCmd.AddCommand(Version())
 
 	return rootCmd
 }
@@ -55,4 +57,17 @@ func initSSHCli() *cobra.Command {
 	cliSSHCmd.PersistentFlags().String("", "", "指明需要执行的CLI Command,多个命令以分号分割并引用双引号")
 	cliSSHCmd.MarkFlagRequired(common.SUB_CMD_SSH_PASS)
 	return cliSSHCmd
+}
+
+func Version() *cobra.Command {
+	var versionCmd = &cobra.Command{
+		Use:   "version",
+		Short: "get the latest version",
+		Long:  "get the latest version",
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Printf("Client Version: %s", common.APP_VERSON)
+		},
+	}
+	versionCmd.PersistentFlags().BoolP("", "", false, "get the version")
+	return versionCmd
 }

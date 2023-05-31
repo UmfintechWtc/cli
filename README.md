@@ -8,6 +8,12 @@ go version go1.20.1 linux/amd64
 make exec cli binary file
 ```
 
+### client version
+```python
+[root@tianciwang:cli_0]# ./cli version
+Client Version: 0.0.3
+```
+
 ### Description
 > Pod executes shell commands
 > SSH remote executes shell commands

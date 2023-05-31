@@ -1,7 +1,8 @@
 package common
 
 const (
-	APP_NAME = "cli"
+	APP_NAME   = "cli"
+	APP_VERSON = "0.0.3\n"
 	// POD执行CMD
 	SUB_CMD_CLI             = "exec_pod"
 	SUB_CMD_CLI_MODE        = "mode"
